@@ -1,384 +1,342 @@
-import React, { useState, useEffect } from 'react';
-
-const RESUME_DATA = {
-    name: "STEVEN MATOS",
-    contact: {
-        title: "Director, Implementation & Optimization Services",
-        tagline: "AI-Forward Delivery | Global Operations Leader",
-        email: "Steven.Matos.Consultant@gmail.com",
-        phone: "860.967.8332",
-        loc: "Los Angeles, CA",
-        linkedin: "https://www.linkedin.com/in/steven-matos/"
-    },
-    summary: "Professional Services leader with 10+ years of experience scaling global implementation organizations. Expert in designing AI-first automation to accelerate delivery speed, reducing manual overhead, and building ARR-generating subscription models in high-growth SaaS environments.",
-    stats: [
-        { label: "ARR GENERATED", val: "$1.4M+", desc: "In a single quarter", color: "#ffdd33" },
-        { label: "AVG CSAT", val: "4.95", desc: "Yearly Average", color: "#47D1C4" },
-        { label: "EFFICIENCY", val: "+40%", desc: "Growth without headcount", color: "#867AFF" },
-        { label: "TIME-TO-VALUE", val: "-30%", desc: "Cycle Reduction", color: "#ff8cde" }
-    ],
-    experience: [
-        {
-            id: "miro-dir",
-            company: "Miro",
-            companyDescription: "A leading visual workspace for innovation, where I drive global strategy for enterprise implementation, adoption, and AI-enabled delivery at scale.",
-            role: "Director, Implementation & Optimization Services",
-            dates: "OCT 2025 - PRESENT",
-            bullets: [
-                { 
-                    title: "Revenue Model Innovation", 
-                    text: "Designed and scaled a pooled-hours, outcome-driven subscription model generating $1.4M+ ARR in its first quarter.", 
-                    detail: <>Established the 'Miro Optimization Services & Training' (MOST) plan—a <strong>$60k/year subscription</strong> offering 240 annual expert hours. This 'Right Expert, Right Time' model gives Enterprise customers access to a pool of specialists, transforming Professional Services from a one-off transactional model into a <strong>predictable, renewable revenue engine</strong>.</>,
-                    outcome: <>Enabled customers to pull services based on specific needs, driving <strong>higher and more consistent utilization</strong> across the team and significantly <strong>improving revenue predictability</strong>.</>
-                },
-                { 
-                    title: "AI & Machine Learning Workflow Design", 
-                    text: "Built custom AI agents and prompt-engineered sidekicks to increase per-consultant delivery leverage.", 
-                    detail: <>Pioneered the 'AI Sidekick' framework to handle discovery synthesis and technical documentation. By automating high-volume content generation, we <strong>reduced consultant manual labor by ~25%</strong>, allowing architects to focus on <strong>high-value strategic advisory</strong>.</>,
-                    outcome: <>Accelerated customer <strong>time-to-value</strong> by providing high-fidelity technical documentation in <strong>minutes instead of days</strong>, increasing organizational delivery leverage by over 25%.</>
-                },
-                { 
-                    title: "Services-Led GTM & Product Stickiness", 
-                    text: "Redefined the engagement model with Sales and Product to position services as a growth engine.", 
-                    detail: <>Partnered with Sales and CS to define services-led go-to-market motions. By tying implementation milestones to <strong>MAU growth and license activation</strong>, we turned Professional Services into a primary driver of account expansion.</>,
-                    outcome: <>Directly impacted <strong>Gross Retention Rate (GRR)</strong> by ensuring customers reached 'sticky' use cases faster through structured technical advocacy.</>
-                }
-            ]
-        },
-        {
-            id: "miro-head",
-            company: "Miro",
-            role: "Head of Global Implementation Services",
-            dates: "APR 2025 - OCT 2025",
-            bullets: [
-                { 
-                    title: "Global Operational Command", 
-                    text: "Built real-time pipeline tracking and forecasting systems using Apps Script, Salesforce, and Google Sheets.", 
-                    detail: <>Engineered a custom pipeline tracker providing absolute visibility into QTD movement. Partnered with RevOps to align headcount planning to demand, ensuring <strong>95%+ margin optimization</strong> across global regions.</>,
-                    outcome: <>Achieved <strong>unprecedented operational visibility</strong>, allowing the organization to scale headcount strictly in alignment with validated pipeline demand.</>
-                },
-                { 
-                    title: "High-Performance Culture & Scalability", 
-                    text: "Standardized global delivery methodologies across regions to foster high-performance standards.", 
-                    detail: <>Developed a consultative delivery framework that moved the team beyond tool-setup toward <strong>strategic business alignment</strong>. Unified onboarding playbooks into a <strong>single, scalable standard of excellence</strong>.</>,
-                    outcome: <>Improved organizational scale by <strong>institutionalizing high-performance standards globally</strong> and reducing deployment variability across enterprise segments.</>
-                },
-                { 
-                    title: "Performance KPI Architecture", 
-                    text: "Established global KPIs and dashboards to monitor implementation success and client satisfaction.", 
-                    detail: <>Designed the reporting framework used by executive leadership to track <strong>delivery velocity and consultant leverage</strong>. Fostered a data-driven culture through transparent performance management.</>,
-                    outcome: <>Sustained a <strong>best-in-class global CSAT of 4.95</strong> while creating a repeatable model for performance tracking during high-demand growth phases.</>
-                }
-            ]
-        },
-        {
-            id: "titan-snr",
-            company: "ServiceTitan",
-            companyDescription: "The premier operating system for the trades, where I scaled high-growth implementation teams.",
-            role: "Senior Manager, Implementation",
-            dates: "MAR 2022 - JUN 2024",
-            bullets: [
-                { 
-                    title: "Delivery Velocity Optimization", 
-                    text: "Reduced total onboarding time by 30% while increasing monthly team delivery capacity by 40%.", 
-                    detail: <>Overhauled the implementation lifecycle for core product verticals by deploying <strong>data-driven capacity models</strong>. Directed a team of 20+ ICs and project managers to hit aggressive scaling targets.</>,
-                    outcome: <>Significantly <strong>accelerated time-to-revenue</strong> for the business and allowed the organization to absorb rapid sales growth <strong>without proportional headcount costs</strong>.</>
-                },
-                { 
-                    title: "Strategic Escalation Mgmt", 
-                    text: "Served as the senior escalation point for high-risk accounts, interfacing with CIO and VP-level stakeholders.", 
-                    detail: <>Owned customer-facing communication and <strong>strategic resolution for multi-million dollar contracts</strong>. Translated complex SOW requirements into clear, technical success criteria.</>,
-                    outcome: <>Prevented churn on high-stakes strategic accounts, directly <strong>protecting multi-million dollar ARR</strong> through executive-level advocacy.</>
-                }
-            ]
-        },
-        {
-            id: "meditech",
-            company: "Healthcare IT Consulting | MEDITECH",
-            companyDescription: "A global leader in Electronic Health Record (EHR) technology.",
-            role: "Senior Implementation Consultant",
-            dates: "JAN 2011 - OCT 2018",
-            bullets: [
-                { 
-                    title: "Technical EMR Deployments", 
-                    text: "Owned end-to-end technical deployments for multi-million-dollar EMR/EHR contracts.", 
-                    detail: <>Managed cross-functional teams of 5-15 through planning, build, and go-live. Expert in <strong>advanced clinical applications</strong> and federal compliance guidelines.</>,
-                    outcome: <>Ensured <strong>100% on-time delivery</strong> for multi-year rollouts while guaranteeing clinical continuity across large hospital systems.</>
-                }
-            ]
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Steven Matos | Executive Portfolio</title>
+    <!-- Core Dependencies -->
+    <script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400;1,900&display=swap');
+        
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Inter', sans-serif;
+            background-color: #FFFFFF;
+            color: #1C1C1E;
+            overflow-x: hidden;
         }
-    ],
-    competencies: {
-        "Leadership": ["Global Team Design", "Hiring & Coaching", "Cross-Functional Influence", "GTM Design"],
-        "Operational": ["Workflow Optimization", "Capacity Planning", "Utilization Modeling", "Pipeline Analytics", "KPI Dashboarding"],
-        "Technical": ["AI/ML Prompt Engineering", "AI Agent Design", "Salesforce Reporting", "Google Apps Script"]
-    },
-    education: "Johnson & Wales University | BS, Business Admin & Mgmt | Summa Cum Laude"
-};
 
-const App = () => {
-    const [selected, setSelected] = useState(null);
-
-    useEffect(() => {
-        if (selected) {
-            document.body.style.overflow = 'hidden';
-        } else {
-            document.body.style.overflow = 'unset';
+        /* Miro Canvas Dot Grid */
+        .miro-grid {
+            position: fixed;
+            inset: 0;
+            background-image: radial-gradient(#EAEAEA 1.5px, transparent 0);
+            background-size: 24px 24px;
+            z-index: -1;
+            pointer-events: none;
         }
-    }, [selected]);
 
-    return (
-        <div className="relative min-h-screen bg-transparent selection:bg-[#ffdd33] selection:text-[#1c1c1e]">
-            <div className="fixed inset-0 pointer-events-none z-[-1] bg-white bg-[radial-gradient(#EAEAEA_1.5px,transparent_0)] [background-size:24px_24px]"></div>
-            
-            <header className="w-full bg-[#1C1C1E] text-white border-b-8 border-[#ffdd33]">
-                <div className="max-w-7xl mx-auto px-6 md:px-12 py-10 md:py-16">
-                    <div className="flex flex-col lg:flex-row justify-between items-start gap-10">
-                        <div className="w-full lg:max-w-2xl animate-in fade-in slide-in-from-left duration-700">
-                            <div className="flex items-center gap-3 mb-4">
-                                <span className="text-[#867AFF] text-[10px] font-black uppercase tracking-[0.4em]">Interactive Portfolio</span>
-                                <div className="h-[1px] flex-grow max-w-[100px] bg-[#867AFF]/40"></div>
-                            </div>
-                            
-                            <h1 className="text-[clamp(40px,10vw,84px)] font-[900] italic uppercase leading-[0.95] tracking-[-0.04em] text-[#ffdd33] mb-4">
-                                {RESUME_DATA.name}
-                            </h1>
-                            
-                            <div className="space-y-1">
-                                <p className="text-xl md:text-3xl font-[900] italic leading-tight text-white uppercase">{RESUME_DATA.contact.title}</p>
-                                <p className="text-white/50 text-sm md:text-lg font-bold italic">{RESUME_DATA.contact.tagline}</p>
-                            </div>
-                            
-                            <div className="mt-8 flex flex-wrap gap-x-6 gap-y-3 text-[11px] font-black uppercase tracking-widest text-[#B3B3B3]">
-                                <a href={RESUME_DATA.contact.linkedin} target="_blank" rel="noreferrer" className="hover:text-white flex items-center gap-2 transition-colors">
-                                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
-                                    LinkedIn
-                                </a>
-                                <div className="flex items-center gap-2">
-                                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-                                    {RESUME_DATA.contact.email}
-                                </div>
-                                <div className="flex items-center gap-2">
-                                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
-                                    {RESUME_DATA.contact.loc}
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <div className="w-full lg:w-auto grid grid-cols-2 gap-4 shrink-0 animate-in fade-in zoom-in duration-700 delay-200">
-                            {RESUME_DATA.stats.map((s, i) => (
-                                <div key={i} className="bg-white text-[#1C1C1E] p-4 md:p-5 rounded-2xl border-[3px] border-[#1C1C1E] shadow-[6px_6px_0px_#1C1C1E] flex flex-col justify-center text-center transform hover:-rotate-1 transition-transform cursor-default">
-                                    <p className="text-[9px] font-black uppercase text-black/40 mb-1 tracking-wider">{s.label}</p>
-                                    <p className="text-2xl md:text-3xl font-[900] italic leading-none">{s.val}</p>
-                                    <p className="text-[9px] font-bold mt-1 uppercase text-black/50 leading-tight">{s.desc}</p>
-                                </div>
-                            ))}
-                        </div>
-                    </div>
-                </div>
-            </header>
+        .custom-scrollbar::-webkit-scrollbar { width: 8px; }
+        .custom-scrollbar::-webkit-scrollbar-track { background: transparent; }
+        .custom-scrollbar::-webkit-scrollbar-thumb { background: #1C1C1E; border-radius: 20px; }
 
-            <main className="max-w-7xl mx-auto px-6 md:px-12 py-16 grid grid-cols-12 gap-12">
-                <div className="col-span-12 lg:col-span-8 space-y-16">
-                    <section className="animate-in fade-in slide-in-from-bottom duration-700">
-                        <div className="flex items-center gap-4 mb-6">
-                            <div className="w-2 h-10 bg-[#ffdd33]"></div>
-                            <h2 className="text-3xl md:text-4xl font-[900] italic uppercase tracking-tighter text-[#1C1C1E]">EXECUTIVE SUMMARY</h2>
-                        </div>
-                        <p className="text-base md:text-lg font-normal italic leading-[1.6] text-[#1C1C1E]/80 tracking-tight">
-                            {RESUME_DATA.summary.split('AI-first')[0]} 
-                            <span className="bg-[#ffdd33] px-2 rounded-lg shadow-[2px_2px_0px_#1C1C1E] border-2 border-[#1C1C1E] mx-1 inline-block rotate-[-1deg] font-black uppercase text-sm not-italic">AI-first</span> 
-                            {RESUME_DATA.summary.split('AI-first')[1]}
-                        </p>
-                    </section>
+        @keyframes ping-pong {
+            0% { transform: translateX(-100%); }
+            50% { transform: translateX(300%); }
+            100% { transform: translateX(-100%); }
+        }
 
-                    <section className="animate-in fade-in slide-in-from-bottom duration-700 delay-300">
-                        {/* Tightened Header Wrapper: Zero bottom margin */}
-                        <div className="mb-0">
-                            <div className="flex items-center gap-4 mb-4">
-                                <div className="w-2 h-10 bg-[#ffdd33]"></div>
-                                <h2 className="text-3xl md:text-4xl font-[900] italic uppercase tracking-tighter text-[#1C1C1E] leading-none">PROFESSIONAL JOURNEY</h2>
-                            </div>
-                            
-                            {/* Adjusted instruction pill to have no bottom margin */}
-                            <div className="relative p-[2px] rounded-full overflow-hidden bg-[#867AFF]/10 ml-0 md:ml-7 w-fit mb-0">
-                                <div className="relative bg-white text-[#867AFF] text-[10px] font-black uppercase tracking-[0.25em] px-6 py-2.5 rounded-full flex items-center gap-3">
-                                    Click any bullet for more information →
-                                    <div className="absolute bottom-0 left-0 w-full h-[3px] bg-black/[0.03] overflow-hidden rounded-full">
-                                        <div className="h-full w-1/4 bg-[#867AFF] animate-[ping-pong_4s_ease-in-out_infinite]"></div>
+        @keyframes slide-in-bottom {
+            from { transform: translateY(20px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        .animate-slide { animation: slide-in-bottom 0.6s ease-out forwards; }
+    </style>
+</head>
+<body>
+    <div class="miro-grid"></div>
+    <div id="root"></div>
+
+    <script type="text/babel">
+        const { useState, useEffect } = React;
+
+        const RESUME_DATA = {
+            name: "STEVEN MATOS",
+            contact: {
+                title: "Director, Implementation & Optimization Services",
+                tagline: "AI-Forward Delivery | Global Operations Leader",
+                email: "Steven.Matos.Consultant@gmail.com",
+                loc: "Los Angeles, CA",
+                linkedin: "https://www.linkedin.com/in/steven-matos/"
+            },
+            summary: "Professional Services leader with 10+ years of experience scaling global implementation organizations. Expert in designing AI-first automation to accelerate delivery speed, reducing manual overhead, and building ARR-generating subscription models in high-growth SaaS environments.",
+            stats: [
+                { label: "ARR GENERATED", val: "$1.4M+", desc: "In a single quarter" },
+                { label: "AVG CSAT", val: "4.95", desc: "Yearly Average" },
+                { label: "EFFICIENCY", val: "+40%", desc: "Growth without headcount" },
+                { label: "TIME-TO-VALUE", val: "-30%", desc: "Cycle Reduction" }
+            ],
+            experience: [
+                {
+                    id: "miro-exp",
+                    company: "Miro",
+                    companyDescription: "A leading visual workspace for innovation, where I drive global strategy for enterprise implementation, adoption, and AI-enabled delivery at scale.",
+                    roles: [
+                        {
+                            title: "Director, Implementation & Optimization Services",
+                            dates: "OCT 2025 - PRESENT",
+                            bullets: [
+                                { 
+                                    title: "Revenue Model Innovation", 
+                                    text: "Designed and scaled a pooled-hours, outcome-driven subscription model generating $1.4M+ ARR in its first quarter.", 
+                                    detail: "Established the 'Miro Optimization Services & Training' (MOST) plan—a $60k/year subscription offering 240 annual expert hours. This transformed Professional Services from a one-off transactional model into a predictable, renewable revenue engine.",
+                                    outcome: "Enabled customers to pull services based on specific needs, driving higher utilization and improving revenue predictability."
+                                },
+                                { 
+                                    title: "AI Workflow Design", 
+                                    text: "Built custom AI agents and prompt-engineered sidekicks to increase per-consultant delivery leverage.", 
+                                    detail: "Pioneered the 'AI Sidekick' framework to handle discovery synthesis and technical documentation, reducing consultant manual labor by ~25%.",
+                                    outcome: "Accelerated customer time-to-value by providing high-fidelity technical documentation in minutes instead of days."
+                                }
+                            ]
+                        },
+                        {
+                            title: "Head of Global Implementation Services",
+                            dates: "APR 2025 - OCT 2025",
+                            bullets: [
+                                { 
+                                    title: "Global Operational Command", 
+                                    text: "Built real-time pipeline tracking and forecasting systems using Apps Script, Salesforce, and Google Sheets.", 
+                                    detail: "Engineered a custom pipeline tracker providing absolute visibility into QTD movement, ensuring 95%+ margin optimization across global regions.",
+                                    outcome: "Achieved unprecedented operational visibility, aligning headcount growth strictly to pipeline demand."
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    id: "titan-snr",
+                    company: "ServiceTitan",
+                    companyDescription: "The premier operating system for the trades, where I scaled high-growth implementation teams.",
+                    roles: [{
+                        title: "Senior Manager, Implementation",
+                        dates: "MAR 2022 - JUN 2024",
+                        bullets: [
+                            { 
+                                title: "Delivery Velocity Optimization", 
+                                text: "Reduced total onboarding time by 30% while increasing monthly team delivery capacity by 40%.", 
+                                detail: "Overhauled the implementation lifecycle by deploying data-driven capacity models for core product verticals.",
+                                outcome: "Significantly accelerated time-to-revenue and allowed the organization to absorb sales growth without proportional headcount costs."
+                            }
+                        ]
+                    }]
+                },
+                {
+                    id: "meditech",
+                    company: "Healthcare IT Consulting | MEDITECH",
+                    companyDescription: "A global leader in Electronic Health Record (EHR) technology.",
+                    roles: [{
+                        title: "Senior Implementation Consultant",
+                        dates: "JAN 2011 - OCT 2018",
+                        bullets: [
+                            { 
+                                title: "Technical EMR Deployments", 
+                                text: "Owned end-to-end technical deployments for multi-million-dollar EMR/EHR contracts.", 
+                                detail: "Managed cross-functional teams of 5-15 through planning, build, and go-live for hospital systems.",
+                                outcome: "Ensured 100% on-time delivery for multi-year rollouts while guaranteeing clinical continuity."
+                            }
+                        ]
+                    }]
+                }
+            ],
+            competencies: {
+                "Leadership": ["Global Team Design", "Hiring & Coaching", "Cross-Functional Influence", "GTM Design"],
+                "Operational": ["Workflow Optimization", "Capacity Planning", "Utilization Modeling", "Pipeline Analytics"],
+                "Technical": ["AI/ML Prompt Engineering", "AI Agent Design", "Salesforce Reporting", "Google Apps Script"]
+            },
+            education: "Johnson & Wales University | BS, Business Admin & Mgmt | Summa Cum Laude"
+        };
+
+        const App = () => {
+            const [selected, setSelected] = useState(null);
+
+            return (
+                <div className="min-h-screen selection:bg-[#ffdd33]">
+                    {/* Dynamic Header */}
+                    <header className="w-full bg-[#1C1C1E] text-white border-b-8 border-[#ffdd33] overflow-hidden">
+                        <div className="max-w-7xl mx-auto px-6 md:px-12 py-12 md:py-16">
+                            <div className="flex flex-col lg:flex-row justify-between items-start gap-12">
+                                <div className="w-full lg:max-w-2xl">
+                                    <div className="flex items-center gap-3 mb-4">
+                                        <span className="text-[#867AFF] text-[10px] font-black uppercase tracking-[0.4em]">Interactive Portfolio</span>
+                                        <div className="h-[1px] flex-grow max-w-[100px] bg-[#867AFF]/40"></div>
+                                    </div>
+                                    <h1 className="text-[clamp(42px,8vw,80px)] font-[900] italic uppercase leading-[0.9] tracking-[-0.04em] text-[#ffdd33] mb-4">
+                                        {RESUME_DATA.name}
+                                    </h1>
+                                    <p className="text-xl md:text-3xl font-[900] italic text-white uppercase">{RESUME_DATA.contact.title}</p>
+                                    <p className="text-white/50 text-sm md:text-lg font-bold italic mt-1">{RESUME_DATA.contact.tagline}</p>
+                                    
+                                    <div className="mt-8 flex flex-wrap gap-6 text-[11px] font-black uppercase tracking-widest text-[#B3B3B3]">
+                                        <a href={RESUME_DATA.contact.linkedin} target="_blank" className="hover:text-white flex items-center gap-2">LinkedIn</a>
+                                        <span>{RESUME_DATA.contact.email}</span>
+                                        <span>{RESUME_DATA.contact.loc}</span>
                                     </div>
                                 </div>
+                                <div className="grid grid-cols-2 gap-4 shrink-0 w-full lg:w-auto">
+                                    {RESUME_DATA.stats.map((s, i) => (
+                                        <div key={i} className="bg-white text-[#1C1C1E] p-5 rounded-2xl border-[3px] border-[#1C1C1E] shadow-[6px_6px_0px_#1C1C1E] text-center">
+                                            <p className="text-[9px] font-black uppercase text-black/40 mb-1">{s.label}</p>
+                                            <p className="text-2xl md:text-3xl font-[900] italic leading-none">{s.val}</p>
+                                            <p className="text-[9px] font-bold mt-1 uppercase text-black/50">{s.desc}</p>
+                                        </div>
+                                    ))}
+                                </div>
                             </div>
                         </div>
+                    </header>
 
-                        {/* Negative top margin to visually pull the Miro section up towards the instruction pill */}
-                        <div className="space-y-16 relative mt-[-1rem]">
-                            <div className="absolute left-[-1.5rem] top-0 bottom-0 w-1 bg-[#1C1C1E]/5 hidden md:block"></div>
-                            
-                            {RESUME_DATA.experience.map((exp, idx) => {
-                                const isFirstAtCompany = idx === 0 || exp.company !== RESUME_DATA.experience[idx-1].company;
-                                const isEarlierExp = exp.id === 'meditech';
+                    <main className="max-w-7xl mx-auto px-6 md:px-12 py-16 grid grid-cols-12 gap-12">
+                        <div className="col-span-12 lg:col-span-8 space-y-16">
+                            {/* Executive Summary */}
+                            <section className="animate-slide">
+                                <div className="flex items-center gap-4 mb-6">
+                                    <div className="w-2 h-10 bg-[#ffdd33]"></div>
+                                    <h2 className="text-3xl md:text-4xl font-[900] italic uppercase tracking-tighter">EXECUTIVE SUMMARY</h2>
+                                </div>
+                                <p className="text-base md:text-lg font-normal italic leading-relaxed text-[#1C1C1E]/80">
+                                    {RESUME_DATA.summary.split('AI-first')[0]} 
+                                    <span className="bg-[#ffdd33] px-2 rounded-lg border-2 border-[#1C1C1E] font-black uppercase text-sm not-italic mx-1">AI-first</span> 
+                                    {RESUME_DATA.summary.split('AI-first')[1]}
+                                </p>
+                            </section>
 
-                                return (
-                                    <div key={exp.id} className={`${!isFirstAtCompany && !isEarlierExp ? 'mt-[-3rem]' : ''} relative`}>
-                                        {isEarlierExp && (
-                                            <div className="flex items-center gap-4 mb-10 mt-16 pt-12 border-t-4 border-[#1C1C1E]/5">
-                                                <div className="w-2 h-10 bg-[#ffdd33] shadow-[4px_4px_0px_#1C1C1E]"></div>
-                                                <h2 className="text-3xl md:text-4xl font-[900] italic uppercase tracking-tighter text-[#1C1C1E]">EARLIER EXPERIENCE</h2>
+                            {/* Professional Journey */}
+                            <section className="animate-slide" style={{ animationDelay: '0.2s' }}>
+                                <div className="mb-2">
+                                    <div className="flex items-center gap-4 mb-4">
+                                        <div className="w-2 h-10 bg-[#ffdd33]"></div>
+                                        <h2 className="text-3xl md:text-4xl font-[900] italic uppercase tracking-tighter">PROFESSIONAL JOURNEY</h2>
+                                    </div>
+                                    <div className="relative p-[2px] rounded-full overflow-hidden bg-[#867AFF]/10 ml-0 md:ml-7 w-fit">
+                                        <div className="relative bg-white text-[#867AFF] text-[10px] font-black uppercase tracking-[0.25em] px-6 py-2.5 rounded-full">
+                                            Click any bullet for more information →
+                                            <div className="absolute bottom-0 left-0 w-full h-[3px] bg-black/[0.03] overflow-hidden rounded-full">
+                                                <div className="h-full w-1/4 bg-[#867AFF] animate-[ping-pong_4s_ease-in-out_infinite]"></div>
                                             </div>
-                                        )}
-
-                                        {isFirstAtCompany && (
-                                            /* Completely removed top padding/margin for the first item (Miro) */
-                                            <div className={`${idx === 0 ? 'mb-4 mt-0 pt-2' : 'mb-6 pt-4'}`}>
-                                                <h3 className="text-2xl md:text-[32px] font-medium italic text-[#1C1C1E] border-b-[10px] border-[#ffdd33] inline-block mb-3 leading-none uppercase tracking-[-0.02em] shadow-[0_4px_0_0_rgba(28,28,30,0.02)]">
-                                                    {exp.company}
-                                                </h3>
-                                                {exp.companyDescription && (
-                                                    <div className="bg-white border-2 border-[#1C1C1E] p-4 rounded-xl shadow-[4px_4px_0px_#EAEAEA] max-w-2xl">
-                                                        <p className="text-sm font-bold text-[#1C1C1E]/70 italic leading-relaxed">{exp.companyDescription}</p>
-                                                    </div>
-                                                )}
-                                            </div>
-                                        )}
-
-                                        <div className="flex flex-col md:flex-row justify-between items-baseline mb-4 gap-3 pt-2">
-                                            <p className="text-lg md:text-xl font-black italic text-[#1C1C1E]/70 uppercase leading-none">{exp.role}</p>
-                                            <span className="text-xs font-black uppercase text-[#1C1C1E]/40 tracking-[0.2em] whitespace-nowrap bg-black/5 px-4 py-1 rounded-full">{exp.dates}</span>
                                         </div>
+                                    </div>
+                                </div>
 
-                                        <div className="space-y-4">
-                                            {exp.bullets.map((b, i) => (
-                                                <div 
-                                                    key={i} 
-                                                    onClick={() => setSelected({ ...b, context: exp.company })}
-                                                    className="group relative cursor-pointer p-4 -ml-4 rounded-[1.5rem] hover:bg-white hover:shadow-[8px_8px_0px_#EAEAEA] border-2 border-transparent hover:border-[#1C1C1E] transition-all duration-300 transform hover:translate-x-4"
-                                                >
-                                                    <div className="absolute left-[-2.5rem] top-1/2 -translate-y-1/2 opacity-0 group-hover:opacity-100 transition-opacity text-[#867AFF] font-black text-2xl hidden md:block">→</div>
-                                                    <p className="text-[14px] md:text-base font-bold leading-snug text-[#1C1C1E]/80">
-                                                        <span className="text-[#867AFF] font-[900] uppercase italic tracking-wider mr-2 text-[14px] md:text-base">/{b.title}:</span> {b.text}
-                                                    </p>
+                                <div className="relative space-y-16 mt-4">
+                                    <div className="absolute left-[-1.5rem] top-0 bottom-0 w-1 bg-[#1C1C1E]/5 hidden md:block"></div>
+                                    
+                                    {RESUME_DATA.experience.map((exp, idx) => (
+                                        <div key={exp.id}>
+                                            {exp.id === 'meditech' && (
+                                                <div className="flex items-center gap-4 mb-10 mt-16 pt-12 border-t-4 border-[#1C1C1E]/5">
+                                                    <div className="w-2 h-10 bg-[#ffdd33]"></div>
+                                                    <h2 className="text-3xl md:text-4xl font-[900] italic uppercase tracking-tighter">EARLIER EXPERIENCE</h2>
                                                 </div>
-                                            ))}
+                                            )}
+
+                                            <div className={`${idx === 0 ? 'mt-0' : 'mt-12'}`}>
+                                                <h3 className="text-2xl md:text-[32px] font-medium italic border-b-[10px] border-[#ffdd33] inline-block mb-3 leading-none uppercase">{exp.company}</h3>
+                                                <div className="bg-white border-2 border-[#1C1C1E] p-4 rounded-xl shadow-[4px_4px_0px_#EAEAEA] max-w-2xl mb-6">
+                                                    <p className="text-sm font-bold text-[#1C1C1E]/70 italic leading-relaxed">{exp.companyDescription}</p>
+                                                </div>
+
+                                                {exp.roles.map((role, rIdx) => (
+                                                    <div key={rIdx} className="mb-8 last:mb-0">
+                                                        <div className="flex flex-col md:flex-row justify-between items-baseline mb-4 gap-3">
+                                                            <p className="text-lg font-black italic text-[#1C1C1E]/70 uppercase">{role.title}</p>
+                                                            <span className="text-[10px] font-black uppercase text-[#1C1C1E]/40 bg-black/5 px-4 py-1.5 rounded-full">{role.dates}</span>
+                                                        </div>
+                                                        <div className="space-y-4">
+                                                            {role.bullets.map((b, i) => (
+                                                                <div 
+                                                                    key={i} 
+                                                                    onClick={() => setSelected({ ...b, context: exp.company })}
+                                                                    className="group relative cursor-pointer p-4 -ml-4 rounded-[1.5rem] border-2 border-transparent hover:border-[#1C1C1E] hover:bg-white transition-all duration-300 transform hover:translate-x-4"
+                                                                >
+                                                                    <div className="absolute left-[-2.5rem] top-1/2 -translate-y-1/2 opacity-0 group-hover:opacity-100 transition-opacity text-[#867AFF] font-black text-2xl hidden md:block">→</div>
+                                                                    <p className="text-sm md:text-base font-bold text-[#1C1C1E]/80">
+                                                                        <span className="text-[#867AFF] font-black italic mr-2 uppercase">/{b.title}:</span> {b.text}
+                                                                    </p>
+                                                                </div>
+                                                            ))}
+                                                        </div>
+                                                    </div>
+                                                ))}
+                                            </div>
                                         </div>
-                                    </div>
-                                );
-                            })}
-                        </div>
-                    </section>
-                </div>
-
-                <div className="col-span-12 lg:col-span-4 space-y-10">
-                    <section className="bg-[#1C1C1E] text-white rounded-[2.5rem] overflow-hidden shadow-2xl border-4 border-[#1C1C1E] animate-in fade-in slide-in-from-right duration-700">
-                        <div className="bg-[#ffdd33] px-8 py-4">
-                            <h2 className="text-xl font-black text-[#1C1C1E] uppercase tracking-wider italic">STRATEGIC SKILLS</h2>
-                        </div>
-                        <div className="p-8 space-y-10">
-                            {Object.entries(RESUME_DATA.competencies).map(([cat, skills], i) => (
-                                <div key={i}>
-                                    <p className="text-[10px] font-black uppercase tracking-[0.4em] text-white/40 mb-4">{cat}</p>
-                                    <div className="flex flex-wrap gap-2">
-                                        {skills.map((s, j) => (
-                                            <span key={j} className="text-[11px] font-black border-2 border-white/10 px-4 py-2 rounded-xl text-white/80 hover:bg-[#ffdd33] hover:text-[#1C1C1E] hover:border-[#ffdd33] transition-all cursor-default">
-                                                {s}
-                                            </span>
-                                        ))}
-                                    </div>
+                                    ))}
                                 </div>
-                            ))}
-                        </div>
-                    </section>
-
-                    <section className="bg-white rounded-[2.5rem] overflow-hidden shadow-xl border-4 border-[#1C1C1E] animate-in fade-in slide-in-from-right duration-700 delay-200">
-                        <div className="bg-[#1C1C1E] px-8 py-4">
-                            <h2 className="text-xl font-black text-[#ffdd33] uppercase tracking-wider italic">EDUCATION</h2>
-                        </div>
-                        <div className="p-8">
-                            <p className="text-base font-black italic text-[#1C1C1E]/80 uppercase leading-snug">
-                                {RESUME_DATA.education}
-                            </p>
-                        </div>
-                    </section>
-
-                    <section className="bg-[#47D1C4] rounded-[2.5rem] overflow-hidden shadow-[8px_8px_0px_#1C1C1E] border-4 border-[#1C1C1E] animate-in fade-in slide-in-from-right duration-700 delay-400">
-                        <div className="bg-[#1C1C1E] px-8 py-4">
-                            <h2 className="text-xl font-black text-white uppercase tracking-wider italic">DIFFERENTIATOR</h2>
-                        </div>
-                        <div className="p-8">
-                            <p className="text-lg font-bold italic text-[#1C1C1E] leading-tight">
-                                Creator of AI-first systems, using AI intentionally to supercharge delivery, efficiency, and growth—turning ambiguous goals into scalable, impactful execution.
-                            </p>
-                        </div>
-                    </section>
-                </div>
-            </main>
-
-            <div className={`fixed top-0 right-0 h-full w-full lg:max-w-xl bg-white z-[1000] border-l-[16px] border-[#1C1C1E] shadow-[-20px_0_60px_rgba(0,0,0,0.3)] transition-transform duration-500 ease-out ${selected ? 'translate-x-0' : 'translate-x-full'}`}>
-                {selected && (
-                    <div className="h-full flex flex-col p-8 md:p-12 overflow-y-auto custom-scrollbar">
-                        <button onClick={() => setSelected(null)} className="mb-12 self-start flex items-center gap-3 bg-[#1C1C1E] text-white px-8 py-3 rounded-full text-xs font-black uppercase tracking-[0.2em] hover:scale-105 transition-all shadow-lg">
-                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="4" strokeLinecap="round" strokeLinejoin="round"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
-                            Back to Portfolio
-                        </button>
-                        
-                        <div className="bg-[#1C1C1E] text-white p-10 rounded-[3rem] shadow-[12px_12px_0px_#ffdd33] mb-12">
-                            <p className="text-[#ffdd33] text-[10px] font-black uppercase tracking-[0.4em] mb-4">Case Insight | {selected.context}</p>
-                            <h2 className="text-3xl md:text-4xl font-[900] italic leading-none tracking-tighter uppercase">{selected.title}</h2>
-                        </div>
-
-                        <div className="space-y-12">
-                            <section>
-                                <div className="flex items-center gap-3 mb-6">
-                                    <h4 className="bg-[#ffdd33] text-[#1C1C1E] px-3 py-1 rounded-md text-[12px] font-black uppercase tracking-[0.4em] shadow-[2px_2px_0px_#1C1C1E]">What I did</h4>
-                                    <div className="h-px flex-grow bg-black/5"></div>
-                                </div>
-                                <p className="text-lg md:text-xl font-light italic text-[#1C1C1E] leading-[1.6] whitespace-pre-wrap tracking-wide">{selected.detail}</p>
-                            </section>
-
-                            <section className="bg-[#F4F4F4] p-8 rounded-[2.5rem] border-l-[12px] border-[#867AFF] shadow-inner">
-                                <div className="flex items-center gap-3 mb-6">
-                                    <h4 className="bg-[#ffdd33] text-[#1C1C1E] px-3 py-1 rounded-md text-[11px] font-black uppercase tracking-widest shadow-[2px_2px_0px_#1C1C1E]">Why it matters</h4>
-                                    <div className="h-px flex-grow bg-black/10"></div>
-                                </div>
-                                <p className="text-base md:text-lg font-light text-[#1C1C1E]/80 italic leading-relaxed whitespace-pre-wrap tracking-wide">{selected.outcome}</p>
                             </section>
                         </div>
+
+                        {/* Sidebar */}
+                        <div className="col-span-12 lg:col-span-4 space-y-10">
+                            <section className="bg-[#1C1C1E] text-white rounded-[2.5rem] overflow-hidden border-4 border-[#1C1C1E]">
+                                <div className="bg-[#ffdd33] px-8 py-4"><h2 className="text-xl font-black text-[#1C1C1E] uppercase italic">STRATEGIC SKILLS</h2></div>
+                                <div className="p-8 space-y-8">
+                                    {Object.entries(RESUME_DATA.competencies).map(([cat, skills], i) => (
+                                        <div key={i}>
+                                            <p className="text-[10px] font-black uppercase tracking-[0.4em] text-white/40 mb-4">{cat}</p>
+                                            <div className="flex flex-wrap gap-2">
+                                                {skills.map((s, j) => (
+                                                    <span key={j} className="text-[11px] font-black border-2 border-white/10 px-4 py-2 rounded-xl text-white/80">{s}</span>
+                                                ))}
+                                            </div>
+                                        </div>
+                                    ))}
+                                </div>
+                            </section>
+
+                            <section className="bg-[#47D1C4] rounded-[2.5rem] overflow-hidden border-4 border-[#1C1C1E] shadow-[8px_8px_0px_#1C1C1E]">
+                                <div className="bg-[#1C1C1E] px-8 py-4"><h2 className="text-xl font-black text-white uppercase italic">DIFFERENTIATOR</h2></div>
+                                <div className="p-8"><p className="text-lg font-bold italic leading-tight">Creator of AI-first systems, using AI intentionally to supercharge delivery, efficiency, and growth.</p></div>
+                            </section>
+                        </div>
+                    </main>
+
+                    {/* Flyout Panel */}
+                    <div className={`fixed top-0 right-0 h-full w-full lg:max-w-xl bg-white z-[1000] border-l-[16px] border-[#1C1C1E] shadow-[-20px_0_60px_rgba(0,0,0,0.3)] transition-transform duration-500 ease-out ${selected ? 'translate-x-0' : 'translate-x-full'}`}>
+                        {selected && (
+                            <div className="h-full flex flex-col p-8 md:p-12 overflow-y-auto custom-scrollbar">
+                                <button onClick={() => setSelected(null)} className="mb-12 self-start flex items-center gap-3 bg-[#1C1C1E] text-white px-8 py-3 rounded-full text-xs font-black uppercase tracking-[0.2em] transition-all shadow-lg">Back to Portfolio</button>
+                                <div className="bg-[#1C1C1E] text-white p-10 rounded-[3rem] shadow-[12px_12px_0px_#ffdd33] mb-12">
+                                    <p className="text-[#ffdd33] text-[10px] font-black uppercase tracking-[0.4em] mb-4">Case Insight | {selected.context}</p>
+                                    <h2 className="text-3xl md:text-4xl font-[900] italic leading-none tracking-tighter uppercase">{selected.title}</h2>
+                                </div>
+                                <div className="space-y-12">
+                                    <section>
+                                        <div className="flex items-center gap-3 mb-6">
+                                            <h4 className="bg-[#ffdd33] text-[#1C1C1E] px-3 py-1 rounded-md text-[12px] font-black uppercase tracking-[0.4em]">What I did</h4>
+                                            <div className="h-px flex-grow bg-black/5"></div>
+                                        </div>
+                                        <p className="text-lg md:text-xl font-light italic text-[#1C1C1E] leading-relaxed">{selected.detail}</p>
+                                    </section>
+                                    <section className="bg-[#F4F4F4] p-8 rounded-[2.5rem] border-l-[12px] border-[#867AFF]">
+                                        <div className="flex items-center gap-3 mb-6">
+                                            <h4 className="bg-[#ffdd33] text-[#1C1C1E] px-3 py-1 rounded-md text-[11px] font-black uppercase tracking-widest">Why it matters</h4>
+                                            <div className="h-px flex-grow bg-black/10"></div>
+                                        </div>
+                                        <p className="text-base md:text-lg font-light text-[#1C1C1E]/80 italic leading-relaxed">{selected.outcome}</p>
+                                    </section>
+                                </div>
+                            </div>
+                        )}
                     </div>
-                )}
-            </div>
 
-            {selected && <div className="fixed inset-0 z-[900] bg-[#1C1C1E]/30 backdrop-blur-md animate-in fade-in duration-300" onClick={() => setSelected(null)}></div>}
+                    {selected && <div className="fixed inset-0 z-[900] bg-[#1C1C1E]/30 backdrop-blur-md" onClick={() => setSelected(null)}></div>}
 
-            <footer className="w-full py-12 px-6 flex flex-col items-center gap-4 opacity-30 select-none">
-                <div className="h-[1px] w-full max-w-md bg-[#1C1C1E]/20"></div>
-                <p className="text-[10px] font-black tracking-[0.8em] uppercase text-center">Steven Matos • Professional Services Leader • © 2026</p>
-            </footer>
+                    <footer className="w-full py-12 px-6 flex flex-col items-center gap-4 opacity-30 select-none">
+                        <div className="h-[1px] w-full max-w-md bg-[#1C1C1E]/20"></div>
+                        <p className="text-[10px] font-black tracking-[0.8em] uppercase text-center">Steven Matos • Professional Services Leader • © 2026</p>
+                    </footer>
+                </div>
+            );
+        };
 
-            <style>{`
-                @import url('https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,300;0,400;0,700;0,900;1,300;1,900&display=swap');
-                body { font-family: 'Inter', sans-serif; background-color: #FFFFFF; }
-                .custom-scrollbar::-webkit-scrollbar { width: 8px; }
-                .custom-scrollbar::-webkit-scrollbar-track { background: transparent; }
-                .custom-scrollbar::-webkit-scrollbar-thumb { background: #1C1C1E; border-radius: 20px; }
-                
-                @keyframes fade-in { from { opacity: 0; } to { opacity: 1; } }
-                @keyframes slide-in-from-bottom { from { transform: translateY(30px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
-                
-                @keyframes ping-pong {
-                    0% { transform: translateX(-100%); }
-                    50% { transform: translateX(300%); }
-                    100% { transform: translateX(-100%); }
-                }
-                
-                .animate-in { animation: slide-in-from-bottom 0.6s ease-out forwards; }
-                
-                @media (max-width: 640px) {
-                    header { padding-top: 2rem !important; padding-bottom: 2rem !important; }
-                    .miro-header-1 { font-size: 3rem !important; }
-                }
-            `}</style>
-        </div>
-    );
-};
-
-export default App;
+        const root = ReactDOM.createRoot(document.getElementById('root'));
+        root.render(<App />);
+    </script>
+</body>
+</html>
