@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Steven Matos | Executive Resume</title>
+    <script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,400;0,700;0,900;1,900&display=swap');
+        
+        body {
+            background-color: #FFFFFF;
+            font-family: 'Inter', sans-serif;
+            color: #1C1C1E;
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden;
+            scroll-behavior: smooth;
+        }
+
+        .miro-grid {
+            position: fixed;
+            inset: 0;
+            background-image: radial-gradient(#EAEAEA 1.5px, transparent 0);
+            background-size: 24px 24px;
+            z-index: -1;
+        }
+
+        .miro-header-1 { 
+            font-weight: 900; 
+            font-style: italic; 
+            text-transform: uppercase; 
+            font-size: clamp(28px, 5.2vw, 72px); 
+            line-height: 1.2; 
+            letter-spacing: -0.05em; 
+            white-space: nowrap;
+        }
+        .miro-header-2 { font-weight: 900; font-style: italic; text-transform: uppercase; font-size: 32px; line-height: 1; letter-spacing: -0.03em; white-space: nowrap; }
+        
+        .point-title {
+            font-weight: 900;
+            text-transform: uppercase;
+            font-size: 14px;
+            font-style: italic;
+            letter-spacing: 0.12em;
+            color: #867AFF;
+            display: inline-block;
+            margin-right: 4px;
+        }
+
+        .bullet-point {
+            position: relative;
+            cursor: pointer;
+            padding: 10px 12px;
+            margin-left: -12px;
+            border-radius: 12px;
+            transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .bullet-point:hover {
+            background: #F4F4F4;
+            transform: translateX(8px);
+        }
+        .bullet-point::before {
+            content: "→";
+            position: absolute;
+            left: -15px;
+            opacity: 0;
+            color: #867AFF;
+            font-weight: 900;
+            transition: opacity 0.2s;
+        }
+        .bullet-point:hover::before { opacity: 1; }
+
+        .sidebar-card {
+            border: 4px solid #1C1C1E;
+            box-shadow: 8px 8px 0px #1C1C1E;
+            transition: transform 0.2s;
+        }
+        .sidebar-card:hover { transform: rotate(-1deg); }
+
+        .flyout-panel {
+            transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            box-shadow: -20px 0 60px rgba(0,0,0,0.15);
+        }
+
+        .custom-scrollbar::-webkit-scrollbar { width: 6px; }
+        .custom-scrollbar::-webkit-scrollbar-track { background: transparent; }
+        .custom-scrollbar::-webkit-scrollbar-thumb { background: #1C1C1E; border-radius: 10px; }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .animate-fade { animation: fadeIn 0.4s ease-out forwards; }
+    </style>
+</head>
+<body>
+    <div class="miro-grid"></div>
+    <div id="root"></div>
+
+    <script type="text/babel">
+        const { useState } = React;
+
+        const RESUME_DATA = {
+            name: "STEVEN MATOS",
+            contact: {
+                title: "Director, Implementation & Optimization Services",
+                tagline: "Al-Forward Delivery | Global Operations Leader",
+                email: "Steven.Matos.Consultant@gmail.com",
+                phone: "860.967.8332",
+                loc: "Los Angeles, CA",
+                linkedin: "https://www.linkedin.com/in/steven-matos/"
+            },
+            summary: "Professional Services leader with 10+ years of experience scaling global implementation organizations. Expert in designing AI-first automation to accelerate delivery speed, reducing manual overhead, and building ARR-generating subscription models in high-growth SaaS environments.",
+            stats: [
+                { label: "ARR GROWTH", val: "$1.4M+", desc: "MOST Program (Q1)", color: "#ffdd33" },
+                { label: "LEADERSHIP", val: "Global", desc: "AMER, EMEA, APAC, JAPAN", color: "#47D1C4" },
+                { label: "RETENTION", val: "4.95", desc: "Global Yearly Average", color: "#867AFF" }
+            ],
+            experience: [
+                {
+                    id: "miro-dir",
+                    company: "Miro",
+                    role: "Director, Implementation & Optimization Services",
+                    dates: "OCT 2025 - PRESENT",
+                    bullets: [
+                        { 
+                            title: "Revenue Model Innovation", 
+                            text: "Designed and scaled a pooled-hours, outcome-driven subscription model generating $1.4M+ ARR in its first quarter.", 
+                            detail: "Established the 'Miro Optimization Services & Training' (MOST) plan—a $60k/year subscription offering 240 annual expert hours. This 'Right Expert, Right Time' model gives Enterprise customers access to a pool of Implementation Consultants, Technical Architects, and Innovation Architects, transforming Professional Services from a one-off transactional model into a predictable, renewable revenue engine that generated over $1.4M in its first quarter.",
+                            outcome: "Enabled customers to define and pull services based on their specific needs (vs. rigid scopes). This increased alignment to real outcomes, drove higher and more consistent utilization across the team, and improved revenue predictability and scalability of the services business."
+                        },
+                        { 
+                            title: "AI & Machine Learning Workflow Design", 
+                            text: "Built custom AI agents and prompt-engineered sidekicks to increase per-consultant delivery leverage.", 
+                            detail: "Pioneered the 'AI Sidekick' framework to handle discovery synthesis and technical documentation. By automating high-volume content generation, we reduced consultant manual labor by ~25%, allowing architects to focus on high-value strategic advisory rather than administrative output.",
+                            outcome: "Increased organizational efficiency by reducing manual consultant task-load by 25%+. Accelerated customer time-to-value by providing high-fidelity technical documentation in minutes instead of days."
+                        },
+                        { 
+                            title: "Services-Led GTM & Product Stickiness", 
+                            text: "Built professional service products tied directly to license activation, MAU growth, and ARR expansion.", 
+                            detail: "Redefined the engagement model with Sales and Product to position services as a growth engine. Tied services delivery to stickiness use-cases, ensuring high-stakes customer deployments translate into measurable platform usage.",
+                            outcome: "Tied professional services directly to revenue outcomes, driving measurable increases in license activation and Gross Retention Rate (GRR) by ensuring customers reached 'sticky' use cases faster."
+                        }
+                    ]
+                },
+                {
+                    id: "miro-head",
+                    company: "Miro",
+                    role: "Head of Global Implementation Services",
+                    dates: "APR 2025 - OCT 2025",
+                    bullets: [
+                        { 
+                            title: "Global Operational Command", 
+                            text: "Built real-time pipeline tracking and forecasting systems using Apps Script, Salesforce, and Google Sheets.", 
+                            detail: "Engineered a custom pipeline tracker that provides absolute visibility into QTD movement and forecast accuracy. Partnered with RevOps and Finance to align global headcount planning to pipeline demand, ensuring 95%+ margin optimization across regions.",
+                            outcome: "Optimized organizational scale by increasing global utilization and ensuring headcount growth was strictly aligned to pipeline demand. Achieved 95% margin optimization targets through real-time operational visibility."
+                        },
+                        { 
+                            title: "High-Performance Culture & Methodology Scalability", 
+                            text: "Standardized global delivery methodologies across regions to foster high-performance standards and turn deployments into outcomes.", 
+                            detail: "Developed a consultative delivery framework that moved the global team beyond tool-setup toward strategic business alignment. Unified multi-regional onboarding playbooks into a single, scalable standard of excellence.",
+                            outcome: "Improved organizational scale by institutionalizing high-performance standards globally. Reduced deployment variability and ensured consistent adoption and recurring value realization across all enterprise segments."
+                        },
+                        { 
+                            title: "Performance KPI Architecture", 
+                            text: "Established global KPIs and dashboards to monitor implementation success, utilization, and client satisfaction.", 
+                            detail: "Designed the reporting framework used by executive leadership to track delivery velocity and consultant leverage. Fostered a high-performance culture across global teams through data-driven performance management.",
+                            outcome: "Sustained a best-in-class global CSAT of 4.95. Improved organizational scale by creating a repeatable model for performance tracking that allowed the team to grow consistently during high-demand phases."
+                        }
+                    ]
+                },
+                {
+                    id: " titan-snr",
+                    company: "ServiceTitan",
+                    role: "Senior Manager, Implementation",
+                    dates: "MAR 2022 - JUN 2024",
+                    bullets: [
+                        { 
+                            title: "Delivery Velocity Optimization", 
+                            text: "Reduced total onboarding time by 30% while increasing monthly team delivery capacity by 40%.", 
+                            detail: "Overhauled the implementation lifecycle for core product verticals by deploying data-driven capacity models. Directed a team of 20+ ICs and project managers.",
+                            outcome: "Significantly accelerated time-to-revenue for the business. Allowed the organization to absorb rapid sales growth without a proportional increase in headcount costs."
+                        },
+                        { 
+                            title: "Strategic Escalation Mgmt", 
+                            text: "Served as the senior escalation point for high-risk accounts, interfacing with CIO and VP-level stakeholders.", 
+                            detail: "Owned customer-facing communication and strategic resolution for multi-million dollar contracts. Translated complex SOW requirements into success criteria.",
+                            outcome: "Directly impacted retention and ARR by preventing churn on multi-million dollar strategic accounts. Stabilized high-risk relationships through executive-level technical advocacy and alignment."
+                        },
+                        { 
+                            title: "Operational Forecasting & Alignment", 
+                            text: "Partnered with Finance and RevOps to build capacity models aligning headcount to pipeline and AOP goals.", 
+                            detail: "Led the development of a predictive resourcing framework that maintained headcount-to-pipeline alignment across core offerings.",
+                            outcome: "Enhanced organizational scale and repeatability by hitting a 90%+ achievement rate on AOP resourcing goals, ensuring core business segments remained adequately staffed for growth."
+                        }
+                    ]
+                },
+                {
+                    id: "meditech",
+                    company: "Healthcare IT Consulting | MEDITECH",
+                    role: "Senior Implementation Consultant",
+                    dates: "JAN 2011 - OCT 2018",
+                    bullets: [
+                        { 
+                            title: "Technical EMR Deployments", 
+                            text: "Owned end-to-end technical deployments for multi-million-dollar EMR/EHR contracts (MEDITECH 6.x).", 
+                            detail: "Managed cross-functional teams of 5-15 through planning, build, and go-live. Expertise in advanced clinical applications including PCM, PDOC, and Order Management.",
+                            outcome: "Ensured 100% on-time delivery for multi-year, multi-million dollar hospital system rollouts. Guaranteed clinical continuity and compliance with federal Meaningful Use guidelines."
+                        },
+                        { 
+                            title: "BPMN Workflow Design", 
+                            text: "Served as BPMN expert for technical workflow design and QA analyst for regional HIE rollouts.", 
+                            detail: "Architected future-state technical workflows for 30+ facilities. Specialized in workflow optimization to align healthcare technology with clinician needs.",
+                            outcome: "Improved customer outcomes (safety/adoption) by standardizing clinical workflows across 30+ facilities. These standardized blueprints reduced regional HIE deployment friction and increased adoption rates."
+                        }
+                    ]
+                }
+            ],
+            competencies: {
+                "Leadership": ["Global Team Design", "Hiring & Coaching", "Cross-Functional Influence", "GTM Design"],
+                "Operational": ["Workflow Optimization", "Capacity Planning", "Utilization Modeling", "Pipeline Analytics", "KPI Dashboarding"],
+                "Technical": ["AI/ML Prompt Engineering", "AI Agent Design", "Salesforce Reporting", "Google Apps Script"]
+            },
+            education: "Johnson & Wales University | BS, Business Admin & Mgmt | Summa Cum Laude"
+        };
+
+        const App = () => {
+            const [selected, setSelected] = useState(null);
+
+            return (
+                <div className="relative min-h-screen pb-10">
+                    
+                    {/* Header Section */}
+                    <div className="w-full bg-[#1C1C1E] text-white pt-12 pb-12 px-8 border-b-8 border-[#ffdd33]">
+                        <div className="max-w-6xl mx-auto flex flex-col md:flex-row justify-between items-start md:items-end gap-8 animate-fade">
+                            <div className="flex-1 overflow-visible">
+                                <div className="flex items-center gap-3 mb-3">
+                                    <span className="text-[#ffdd33] text-[10px] font-black uppercase tracking-[0.4em]">Interactive Portfolio</span>
+                                    <div className="h-px w-24 bg-white/20"></div>
+                                </div>
+                                <div className="overflow-visible py-2">
+                                    <h1 className="miro-header-1 text-[#ffdd33]">{RESUME_DATA.name}</h1>
+                                </div>
+                                <p className="text-xl md:text-2xl font-black italic mt-1">{RESUME_DATA.contact.title}</p>
+                                <p className="text-white/50 text-base md:text-lg font-bold italic mt-1">{RESUME_DATA.contact.tagline}</p>
+                                
+                                <div className="mt-8 flex flex-wrap gap-6 text-[11px] font-black uppercase tracking-widest text-[#B3B3B3]">
+                                    <a href={RESUME_DATA.contact.linkedin} target="_blank" className="hover:text-white flex items-center gap-2 transition-colors">
+                                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+                                        LinkedIn
+                                    </a>
+                                    <span className="flex items-center gap-2">
+                                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+                                        {RESUME_DATA.contact.email}
+                                    </span>
+                                    <span className="flex items-center gap-2">
+                                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                                        {RESUME_DATA.contact.loc}
+                                    </span>
+                                </div>
+                            </div>
+                            
+                            <div className="flex gap-4">
+                                {RESUME_DATA.stats.map((s, i) => (
+                                    <div key={i} className="bg-white text-[#1C1C1E] p-4 rounded-2xl sidebar-card w-32 md:w-40 text-center shrink-0">
+                                        <p className="text-[10px] font-black uppercase text-black/40 mb-1">{s.label}</p>
+                                        <p className="text-2xl md:text-3xl font-black italic">{s.val}</p>
+                                        <p className="text-[9px] font-bold mt-1 uppercase text-black/50">{s.desc}</p>
+                                    </div>
+                                ))}
+                            </div>
+                        </div>
+                    </div>
+
+                    {/* Main Scrolling Content */}
+                    <div className="max-w-6xl mx-auto px-8 py-16 grid grid-cols-12 gap-12">
+                        
+                        {/* Summary & Experience Column */}
+                        <div className="col-span-12 lg:col-span-8 space-y-16 animate-fade" style={{ animationDelay: '0.1s' }}>
+                            
+                            <section>
+                                <h2 className="miro-header-2 text-black/20 mb-6">EXECUTIVE SUMMARY</h2>
+                                <p className="text-2xl font-bold italic leading-tight tracking-tight text-black/80">
+                                    "{RESUME_DATA.summary.split('AI-first')[0]} 
+                                    <span className="bg-[#ffdd33] px-2 rounded shadow-sm">AI-first</span> 
+                                    {RESUME_DATA.summary.split('AI-first')[1]}"
+                                </p>
+                            </section>
+
+                            <section>
+                                <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-10">
+                                    <h2 className="miro-header-2 text-black/20">PROFESSIONAL JOURNEY</h2>
+                                    <p className="text-[#867AFF] text-[10px] font-black uppercase italic tracking-widest border-2 border-[#867AFF]/20 px-3 py-1 rounded-lg shrink-0">
+                                        Click any bullet for more information →
+                                    </p>
+                                </div>
+                                <div className="space-y-16">
+                                    {RESUME_DATA.experience.map((exp, idx) => {
+                                        const isFirstAtCompany = idx === 0 || exp.company !== RESUME_DATA.experience[idx-1].company;
+                                        const isEarlierExp = exp.id === 'meditech';
+                                        
+                                        return (
+                                            <div key={exp.id} className="relative group">
+                                                {isEarlierExp && (
+                                                    <h2 className="miro-header-2 text-black/20 mb-6 mt-12 border-t-4 border-black/5 pt-8">EARLIER EXPERIENCE</h2>
+                                                )}
+                                                {isFirstAtCompany && (
+                                                    <h3 className="miro-header text-3xl md:text-4xl text-[#1C1C1E] border-b-4 border-[#ffdd33] inline-block transition-all mb-4">{exp.company}</h3>
+                                                )}
+                                                <div className={`flex flex-col md:flex-row justify-between items-baseline mb-6 gap-2 ${!isFirstAtCompany && !isEarlierExp ? 'mt-[-1rem]' : ''}`}>
+                                                    <p className="text-lg md:text-xl font-black italic text-black/60">{exp.role}</p>
+                                                    <span className="text-[11px] font-black uppercase text-black/40 tracking-widest whitespace-nowrap">{exp.dates}</span>
+                                                </div>
+
+                                                <div className="space-y-4">
+                                                    {exp.bullets.map((b, i) => (
+                                                        <div 
+                                                            key={i} 
+                                                            onClick={() => setSelected({ ...b, context: exp.company })}
+                                                            className="bullet-point"
+                                                        >
+                                                            <p className="text-[15px] font-bold leading-relaxed text-black/70">
+                                                                <span className="point-title">/{b.title}:</span> {b.text}
+                                                            </p>
+                                                        </div>
+                                                    ))}
+                                                </div>
+                                            </div>
+                                        );
+                                    })}
+                                </div>
+                            </section>
+                        </div>
+
+                        {/* Right Sidebar: Skills & Info */}
+                        <div className="col-span-12 lg:col-span-4 space-y-10 animate-fade" style={{ animationDelay: '0.2s' }}>
+                            {/* STRATEGIC SKILLS - Dark Mode Column */}
+                            <section className="border-4 border-[#1C1C1E] rounded-[2.5rem] bg-[#1C1C1E] overflow-hidden shadow-lg">
+                                <div className="bg-[#ffdd33] px-8 py-3">
+                                    <h2 className="miro-header text-xl text-[#1C1C1E]">STRATEGIC SKILLS</h2>
+                                </div>
+                                <div className="p-8 space-y-8">
+                                    {Object.entries(RESUME_DATA.competencies).map(([cat, skills], i) => (
+                                        <div key={i}>
+                                            <p className="text-[10px] font-black uppercase tracking-[0.3em] text-white/40 mb-3">{cat}</p>
+                                            <div className="flex flex-col gap-2 items-start">
+                                                {skills.map((s, j) => (
+                                                    <span key={j} className="text-[11px] font-bold border border-white/20 px-3 py-1.5 rounded-xl text-white hover:bg-[#ffdd33] hover:text-[#1C1C1E] hover:border-[#ffdd33] transition-all cursor-default w-fit">
+                                                        {s}
+                                                    </span>
+                                                ))}
+                                            </div>
+                                        </div>
+                                    ))}
+                                </div>
+                            </section>
+
+                            <section className="border-4 border-[#1C1C1E] rounded-[2.5rem] bg-white overflow-hidden shadow-lg">
+                                <div className="bg-[#1C1C1E] px-8 py-3">
+                                    <h2 className="miro-header text-xl text-[#ffdd33]">EDUCATION</h2>
+                                </div>
+                                <div className="p-8">
+                                    <p className="text-[14px] font-black italic text-black/60 uppercase leading-snug">
+                                        {RESUME_DATA.education}
+                                    </p>
+                                </div>
+                            </section>
+
+                            <section className="border-4 border-[#1C1C1E] rounded-[2.5rem] bg-[#47D1C4] overflow-hidden shadow-[6px_6px_0px_#1C1C1E]">
+                                <div className="bg-[#1C1C1E] px-8 py-3">
+                                    <h2 className="miro-header text-xl text-white">KEY DIFFERENTIATOR</h2>
+                                </div>
+                                <div className="p-8">
+                                    <p className="text-[15px] font-bold italic text-[#1C1C1E] leading-snug">
+                                        Early adopter of AI in services delivery, leveraging generative agents to move from "bought hours" to "realized outcomes" across global implementation pods.
+                                    </p>
+                                </div>
+                            </section>
+                        </div>
+                    </div>
+
+                    {/* INTERACTIVE FLYOUT PANEL */}
+                    <div 
+                        className={`flyout-panel fixed top-0 right-0 h-full w-full max-w-[500px] bg-white z-[100] border-l-[16px] border-[#1C1C1E] p-12 overflow-y-auto ${selected ? 'translate-x-0' : 'translate-x-full'}`}
+                    >
+                        {selected && (
+                            <div className="animate-fade">
+                                <button 
+                                    onClick={() => setSelected(null)}
+                                    className="mb-12 flex items-center gap-3 bg-[#1C1C1E] text-white px-6 py-2 rounded-full text-[11px] font-black uppercase tracking-widest hover:scale-105 transition-transform"
+                                >
+                                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="4"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+                                    Back to Resume
+                                </button>
+                                
+                                <div className="bg-[#1C1C1E] text-white p-10 rounded-[3rem] shadow-[12px_12px_0px_#ffdd33] mb-12">
+                                    <p className="text-[#ffdd33] text-[10px] font-black uppercase tracking-[0.4em] mb-4">Core Skill | {selected.context}</p>
+                                    <h2 className="miro-header text-3xl leading-tight">{selected.title}</h2>
+                                </div>
+
+                                <div className="space-y-12">
+                                    <section>
+                                        <h4 className="text-[12px] font-black uppercase tracking-[0.3em] text-black/30 mb-6 border-b-4 border-black/5 pb-2">Operational Insight</h4>
+                                        <p className="text-xl font-bold italic text-black/80 leading-relaxed whitespace-pre-wrap">
+                                            {selected.detail}
+                                        </p>
+                                    </section>
+
+                                    <section className="bg-black/5 p-8 rounded-[2rem] border-l-8 border-[#867AFF]">
+                                        <h4 className="text-[11px] font-black uppercase tracking-widest text-black/40 mb-3">Business Value & Outcomes</h4>
+                                        <p className="text-[15px] font-bold text-black/70 italic leading-relaxed whitespace-pre-wrap">
+                                            {selected.outcome}
+                                        </p>
+                                    </section>
+                                </div>
+                            </div>
+                        )}
+                    </div>
+
+                    {/* Overlay Backdrop */}
+                    {selected && <div className="fixed inset-0 z-[90] bg-black/20 backdrop-blur-sm" onClick={() => setSelected(null)}></div>}
+
+                    <footer className="text-center mt-8 opacity-10">
+                        <p className="text-[12px] font-black tracking-[0.5em] uppercase">Steven Matos Executive Portfolio © 2026</p>
+                    </footer>
+                </div>
+            );
+        };
+
+        const root = ReactDOM.createRoot(document.getElementById('root'));
+        root.render(<App />);
+    </script>
+</body>
+</html>
