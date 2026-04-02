@@ -33,13 +33,25 @@
             font-weight: 900; 
             font-style: italic; 
             text-transform: uppercase; 
-            font-size: clamp(28px, 5.2vw, 72px); 
+            font-size: clamp(24px, 5.2vw, 72px); 
             line-height: 1.2; 
             letter-spacing: -0.05em; 
             white-space: nowrap;
         }
-        .miro-header-2 { font-weight: 900; font-style: italic; text-transform: uppercase; font-size: 32px; line-height: 1; letter-spacing: -0.03em; white-space: nowrap; }
+        .miro-header-2 { 
+            font-weight: 900; 
+            font-style: italic; 
+            text-transform: uppercase; 
+            font-size: 42px; /* Increased from 32px */
+            line-height: 1.1; 
+            letter-spacing: -0.03em; 
+        }
         
+        .section-anchor {
+            border-left: 8px solid #ffdd33;
+            padding-left: 1.25rem;
+        }
+
         .point-title {
             font-weight: 900;
             text-transform: uppercase;
@@ -95,6 +107,16 @@
             to { opacity: 1; transform: translateY(0); }
         }
         .animate-fade { animation: fadeIn 0.4s ease-out forwards; }
+
+        .instruction-tag {
+            background: #867AFF;
+            color: white;
+            box-shadow: 0 4px 12px rgba(134, 122, 255, 0.2);
+            transition: transform 0.2s;
+        }
+        .instruction-tag:hover {
+            transform: translateY(-1px);
+        }
     </style>
 </head>
 <body>
@@ -116,21 +138,23 @@
             },
             summary: "Professional Services leader with 10+ years of experience scaling global implementation organizations. Expert in designing AI-first automation to accelerate delivery speed, reducing manual overhead, and building ARR-generating subscription models in high-growth SaaS environments.",
             stats: [
-                { label: "ARR GROWTH", val: "$1.4M+", desc: "MOST Program (Q1)", color: "#ffdd33" },
-                { label: "LEADERSHIP", val: "Global", desc: "AMER, EMEA, APAC, JAPAN", color: "#47D1C4" },
-                { label: "RETENTION", val: "4.95", desc: "Global Yearly Average", color: "#867AFF" }
+                { label: "ARR GENERATED", val: "$1.4M+", desc: "In a single quarter", color: "#ffdd33" },
+                { label: "AVG CSAT", val: "4.95", desc: "Yearly Average", color: "#47D1C4" },
+                { label: "EFFICIENCY", val: "+40%", desc: "growth without headcount", color: "#867AFF" },
+                { label: "TIME-TO-VALUE", val: "-30%", desc: "Cycle Reduction", color: "#ff8cde" }
             ],
             experience: [
                 {
                     id: "miro-dir",
                     company: "Miro",
+                    companyDescription: "A leading visual workspace for innovation, where I drive global strategy for enterprise implementation, adoption, and AI-enabled delivery at scale.",
                     role: "Director, Implementation & Optimization Services",
                     dates: "OCT 2025 - PRESENT",
                     bullets: [
                         { 
                             title: "Revenue Model Innovation", 
                             text: "Designed and scaled a pooled-hours, outcome-driven subscription model generating $1.4M+ ARR in its first quarter.", 
-                            detail: "Established the 'Miro Optimization Services & Training' (MOST) plan—a $60k/year subscription offering 240 annual expert hours. This 'Right Expert, Right Time' model gives Enterprise customers access to a pool of Implementation Consultants, Technical Architects, and Innovation Architects, transforming Professional Services from a one-off transactional model into a predictable, renewable revenue engine that generated over $1.4M in its first quarter.",
+                            detail: "Established the 'Miro Optimization Services & Training' (MOST) plan—a $60k/year subscription offering 240 annual expert hours. This 'Right Expert, Right Time' model gives Enterprise customers access to a pool of Implementation Consultants, Technical Architects, and Innovation Architects, transforming Professional Services from a one-off transactional model into a predictable, renewable revenue engine.",
                             outcome: "Enabled customers to define and pull services based on their specific needs (vs. rigid scopes). This increased alignment to real outcomes, drove higher and more consistent utilization across the team, and improved revenue predictability and scalability of the services business."
                         },
                         { 
@@ -141,8 +165,8 @@
                         },
                         { 
                             title: "Services-Led GTM & Product Stickiness", 
-                            text: "Built professional service products tied directly to license activation, MAU growth, and ARR expansion.", 
-                            detail: "Redefined the engagement model with Sales and Product to position services as a growth engine. Tied services delivery to stickiness use-cases, ensuring high-stakes customer deployments translate into measurable platform usage.",
+                            text: "Redefined the engagement model with Sales and Product to position services as a growth engine. Tied services delivery to stickiness use-cases, ensuring high-stakes customer deployments translate into measurable platform usage.", 
+                            detail: "Partnered with Sales and CS to define services-led go-to-market motions. By tying implementation milestones to MAU growth and license activation, we turned Professional Services into a primary driver of account expansion.",
                             outcome: "Tied professional services directly to revenue outcomes, driving measurable increases in license activation and Gross Retention Rate (GRR) by ensuring customers reached 'sticky' use cases faster."
                         }
                     ]
@@ -176,6 +200,7 @@
                 {
                     id: " titan-snr",
                     company: "ServiceTitan",
+                    companyDescription: "The premier operating system for the trades, where I scaled high-growth implementation teams and optimized delivery velocity for strategic verticals.",
                     role: "Senior Manager, Implementation",
                     dates: "MAR 2022 - JUN 2024",
                     bullets: [
@@ -192,7 +217,7 @@
                             outcome: "Directly impacted retention and ARR by preventing churn on multi-million dollar strategic accounts. Stabilized high-risk relationships through executive-level technical advocacy and alignment."
                         },
                         { 
-                            title: "Operational Forecasting & Alignment", 
+                            title: "AOP-Aligned Forecasting", 
                             text: "Partnered with Finance and RevOps to build capacity models aligning headcount to pipeline and AOP goals.", 
                             detail: "Led the development of a predictive resourcing framework that maintained headcount-to-pipeline alignment across core offerings.",
                             outcome: "Enhanced organizational scale and repeatability by hitting a 90%+ achievement rate on AOP resourcing goals, ensuring core business segments remained adequately staffed for growth."
@@ -202,6 +227,7 @@
                 {
                     id: "meditech",
                     company: "Healthcare IT Consulting | MEDITECH",
+                    companyDescription: "A global leader in Electronic Health Record (EHR) technology, where I led complex technical deployments and workflow standardization for hospital systems.",
                     role: "Senior Implementation Consultant",
                     dates: "JAN 2011 - OCT 2018",
                     bullets: [
@@ -264,12 +290,12 @@
                                 </div>
                             </div>
                             
-                            <div className="flex gap-4">
+                            <div className="grid grid-cols-2 gap-4 shrink-0">
                                 {RESUME_DATA.stats.map((s, i) => (
-                                    <div key={i} className="bg-white text-[#1C1C1E] p-4 rounded-2xl sidebar-card w-32 md:w-40 text-center shrink-0">
-                                        <p className="text-[10px] font-black uppercase text-black/40 mb-1">{s.label}</p>
+                                    <div key={i} className="bg-white text-[#1C1C1E] p-4 rounded-2xl sidebar-card w-36 md:w-44 text-center">
+                                        <p className="text-[10px] font-black uppercase text-black/40 mb-1 leading-tight">{s.label}</p>
                                         <p className="text-2xl md:text-3xl font-black italic">{s.val}</p>
-                                        <p className="text-[9px] font-bold mt-1 uppercase text-black/50">{s.desc}</p>
+                                        <p className="text-[9px] font-bold mt-1 uppercase text-black/50 leading-tight">{s.desc}</p>
                                     </div>
                                 ))}
                             </div>
@@ -283,18 +309,20 @@
                         <div className="col-span-12 lg:col-span-8 space-y-16 animate-fade" style={{ animationDelay: '0.1s' }}>
                             
                             <section>
-                                <h2 className="miro-header-2 text-black/20 mb-6">EXECUTIVE SUMMARY</h2>
-                                <p className="text-2xl font-bold italic leading-tight tracking-tight text-black/80">
-                                    "{RESUME_DATA.summary.split('AI-first')[0]} 
+                                <h2 className="miro-header-2 text-[#1C1C1E] mb-6 section-anchor uppercase">EXECUTIVE SUMMARY</h2>
+                                <p className="text-xl font-bold italic leading-tight tracking-tight text-black/80">
+                                    {RESUME_DATA.summary.split('AI-first')[0]} 
                                     <span className="bg-[#ffdd33] px-2 rounded shadow-sm">AI-first</span> 
-                                    {RESUME_DATA.summary.split('AI-first')[1]}"
+                                    {RESUME_DATA.summary.split('AI-first')[1]}
                                 </p>
                             </section>
 
                             <section>
-                                <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-10">
-                                    <h2 className="miro-header-2 text-black/20">PROFESSIONAL JOURNEY</h2>
-                                    <p className="text-[#867AFF] text-[10px] font-black uppercase italic tracking-widest border-2 border-[#867AFF]/20 px-3 py-1 rounded-lg shrink-0">
+                                <div className="mb-10">
+                                    <div className="section-anchor mb-4">
+                                        <h2 className="miro-header-2 text-[#1C1C1E] uppercase">PROFESSIONAL JOURNEY</h2>
+                                    </div>
+                                    <p className="instruction-tag text-[11px] font-black uppercase tracking-[0.15em] px-4 py-1.5 rounded-full inline-block ml-4 cursor-default">
                                         Click any bullet for more information →
                                     </p>
                                 </div>
@@ -306,10 +334,15 @@
                                         return (
                                             <div key={exp.id} className="relative group">
                                                 {isEarlierExp && (
-                                                    <h2 className="miro-header-2 text-black/20 mb-6 mt-12 border-t-4 border-black/5 pt-8">EARLIER EXPERIENCE</h2>
+                                                    <h2 className="miro-header-2 text-[#1C1C1E] mb-8 mt-16 section-anchor uppercase border-t-4 border-black/5 pt-10">EARLIER EXPERIENCE</h2>
                                                 )}
                                                 {isFirstAtCompany && (
-                                                    <h3 className="miro-header text-3xl md:text-4xl text-[#1C1C1E] border-b-4 border-[#ffdd33] inline-block transition-all mb-4">{exp.company}</h3>
+                                                    <div className="mb-6">
+                                                        <h3 className="miro-header text-3xl md:text-4xl text-[#1C1C1E] border-b-4 border-[#ffdd33] inline-block transition-all mb-3">{exp.company}</h3>
+                                                        <div className="bg-[#F4F4F4] border-l-4 border-[#1C1C1E]/20 px-5 py-3 rounded-r-xl max-w-2xl">
+                                                            <p className="text-[14px] font-bold text-black/70 italic leading-relaxed">{exp.companyDescription}</p>
+                                                        </div>
+                                                    </div>
                                                 )}
                                                 <div className={`flex flex-col md:flex-row justify-between items-baseline mb-6 gap-2 ${!isFirstAtCompany && !isEarlierExp ? 'mt-[-1rem]' : ''}`}>
                                                     <p className="text-lg md:text-xl font-black italic text-black/60">{exp.role}</p>
@@ -341,7 +374,7 @@
                             {/* STRATEGIC SKILLS - Dark Mode Column */}
                             <section className="border-4 border-[#1C1C1E] rounded-[2.5rem] bg-[#1C1C1E] overflow-hidden shadow-lg">
                                 <div className="bg-[#ffdd33] px-8 py-3">
-                                    <h2 className="miro-header text-xl text-[#1C1C1E]">STRATEGIC SKILLS</h2>
+                                    <h2 className="miro-header text-xl text-[#1C1C1E] font-black uppercase">STRATEGIC SKILLS</h2>
                                 </div>
                                 <div className="p-8 space-y-8">
                                     {Object.entries(RESUME_DATA.competencies).map(([cat, skills], i) => (
@@ -361,7 +394,7 @@
 
                             <section className="border-4 border-[#1C1C1E] rounded-[2.5rem] bg-white overflow-hidden shadow-lg">
                                 <div className="bg-[#1C1C1E] px-8 py-3">
-                                    <h2 className="miro-header text-xl text-[#ffdd33]">EDUCATION</h2>
+                                    <h2 className="miro-header text-xl text-[#ffdd33] font-black uppercase">EDUCATION</h2>
                                 </div>
                                 <div className="p-8">
                                     <p className="text-[14px] font-black italic text-black/60 uppercase leading-snug">
@@ -372,11 +405,11 @@
 
                             <section className="border-4 border-[#1C1C1E] rounded-[2.5rem] bg-[#47D1C4] overflow-hidden shadow-[6px_6px_0px_#1C1C1E]">
                                 <div className="bg-[#1C1C1E] px-8 py-3">
-                                    <h2 className="miro-header text-xl text-white">KEY DIFFERENTIATOR</h2>
+                                    <h2 className="miro-header text-xl text-white font-black uppercase">KEY DIFFERENTIATOR</h2>
                                 </div>
                                 <div className="p-8">
                                     <p className="text-[15px] font-bold italic text-[#1C1C1E] leading-snug">
-                                        Early adopter of AI in services delivery, leveraging generative agents to move from "bought hours" to "realized outcomes" across global implementation pods.
+                                        Creator of AI-first systems, using AI intentionally to supercharge delivery, efficiency, and growth—turning ambiguous goals into scalable, impactful execution.
                                     </p>
                                 </div>
                             </section>
